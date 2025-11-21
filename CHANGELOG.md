@@ -6,3 +6,4 @@ Changelog entry: incremental commit 15
 Changelog entry: incremental commit 16
 Changelog entry: incremental commit 17
 Changelog entry: incremental commit 18
+Changelog entry: incremental commit 19
