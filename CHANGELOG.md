@@ -11,3 +11,4 @@ Changelog entry: incremental commit 20
 Changelog entry: incremental commit 21
 Changelog entry: incremental commit 22
 Changelog entry: incremental commit 23
+Changelog entry: incremental commit 24
