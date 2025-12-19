@@ -1,0 +1,207 @@
+# =============================================================================
+# Docker Compose - Spark Streaming Pipeline
+# =============================================================================
+# Requirements implemented:
+# 1. FastAPI - generates random data similar to dataco dataset, sends via WebSocket
+# 2. Bridge - receives WebSocket data and forwards to TCP socket for Spark
+# 3. Spark Streaming - reads from TCP, applies windowing, transforms, predicts
+# 4. PostgreSQL - stores predictions
+# 5. MongoDB - stores aggregated insights
+# 6. Streamlit - visualizes aggregated data from MongoDB
+# 7. Airflow - orchestrates the entire pipeline
+# =============================================================================
+
+services:
+  # -------------------------------------------------------------------------
+  # PostgreSQL - Stores streaming predictions
+  # -------------------------------------------------------------------------
+  postgres:
+    image: postgres:15
+    container_name: postgres
+    environment:
+      POSTGRES_USER: loguser
+      POSTGRES_PASSWORD: Ren-ji24
+      POSTGRES_DB: logistics
+    ports:
+      - "5433:5434"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  # -------------------------------------------------------------------------
+  # MongoDB - Stores aggregated insights
+  # -------------------------------------------------------------------------
+  mongo:
+    image: mongo:6
+    container_name: mongo
+    ports:
+      - "27018:27017"
+    volumes:
+      - mongodata:/data/db
+
+  # Base image builder
+  app:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    image: gestionlogistique-app
+    container_name: gestionlogistique-base
+
+  # -------------------------------------------------------------------------
+  # Streamlit Dashboard - Visualizes aggregated data from MongoDB (Task 8)
+  # -------------------------------------------------------------------------
+  streamlit:
+    image: gestionlogistique-app
+    container_name: streamlit-app
+    depends_on:
+      - app
+      - mongo
+    ports:
+      - "1234:1234"
+    command: streamlit run streamlit_dash/dashboard_streaming.py --server.port=1234 --server.address=0.0.0.0
+    volumes:
+      - ./src:/src/src
+      - ./data:/src/data
+      - ./view:/src/view
+      - ./streamlit_dash:/src/streamlit_dash
+      - ./src/models:/src/models
+    environment:
+      - MODEL_DIR=/src/models
+      - MONGO_URI=mongodb://mongo:27017
+      - MONGO_DB=logistics
+      - MONGO_COLLECTION_AGG=aggregates
+
+  # -------------------------------------------------------------------------
+  # Streamlit Model Tester - Test model with manual inputs
+  # -------------------------------------------------------------------------
+  streamlit-model:
+    image: gestionlogistique-app
+    container_name: streamlit-model-tester
+    depends_on:
+      - app
+    ports:
+      - "8501:8501"
+    command: streamlit run streamlit_dash/model_tester.py --server.port=8501 --server.address=0.0.0.0
+    volumes:
+      - ./streamlit_dash:/src/streamlit_dash
+      - ./src/models:/src/models
+      - ./data:/src/data
+    environment:
+      - MODEL_DIR=/src/models
+
+  # -------------------------------------------------------------------------
+  # Jupyter Notebook - Development environment
+  # -------------------------------------------------------------------------
+  jupyter:
+    image: gestionlogistique-app
+    container_name: jupyter-app
+    depends_on:
+      - app
+    ports:
+      - "8888:8888"
+    command: jupyter notebook --ip=0.0.0.0 --port=8888 --no-browser --allow-root
+    volumes:
+      - ./src:/src/src
+      - ./data:/src/data
+      - ./view:/src/view
+      - ./src/models:/src/models
+    environment:
+      - MODEL_DIR=/src/models
+
+  # -------------------------------------------------------------------------
+  # FastAPI - Generates random dataco-like data via WebSocket (Task 1)
+  # -------------------------------------------------------------------------
+  fastapi:
+    image: gestionlogistique-app
+    container_name: fastapi
+    depends_on:
+      - app
+    command: uvicorn api.fastapi_app:app --host 0.0.0.0 --port 8000
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./api:/src/api
+      - ./src/models:/src/models
+    environment:
+      - MODEL_DIR=/src/models
+
+  # -------------------------------------------------------------------------
+  # Bridge - WebSocket to TCP bridge for Spark Streaming (Task 2)
+  # -------------------------------------------------------------------------
+  bridge:
+    image: gestionlogistique-app
+    container_name: bridge
+    depends_on:
+      - fastapi
+    command: python /src/streaming/bridge.py
+    volumes:
+      - ./streaming:/src/streaming
+    environment:
+      - FASTAPI_WS_URL=ws://fastapi:8000/ws
+      - BRIDGE_TCP_PORT=9999
+
+  # -------------------------------------------------------------------------
+  # Spark Streaming - Reads TCP, transforms, predicts, stores (Tasks 3-7)
+  # - Windowing for event grouping
+  # - Loads trained model from batch
+  # - Stores predictions in PostgreSQL
+  # - Aggregates and stores insights in MongoDB
+  # -------------------------------------------------------------------------
+  spark-stream:
+    image: gestionlogistique-app
+    container_name: spark-stream
+    depends_on:
+      - bridge
+      - fastapi
+      - postgres
+      - mongo
+    command: bash -c "spark-submit --packages org.postgresql:postgresql:42.6.0 /src/streaming/spark_streaming_job.py"
+    volumes:
+      - ./streaming:/src/streaming
+      - ./src/models:/src/models
+    environment:
+      - MODEL_DIR=/src/models
+      - BRIDGE_HOST=bridge
+      - BRIDGE_TCP_PORT=9999
+      - POSTGRES_URL=jdbc:postgresql://postgres:5432/logistics
+      - POSTGRES_USER=loguser
+      - POSTGRES_PASSWORD=Ren-ji24
+      - MONGO_URI=mongodb://mongo:27017
+      - MONGO_DB=logistics
+      - MONGO_COLLECTION_AGG=aggregates
+
+  # -------------------------------------------------------------------------
+  # Airflow - Orchestrates the entire pipeline (Task 9)
+  # - DAG automates: data retrieval, transformations, predictions, storage
+  # -------------------------------------------------------------------------
+  airflow:
+    image: gestionlogistique-app
+    container_name: airflow
+    depends_on:
+      - fastapi
+      - bridge
+      - spark-stream
+      - postgres
+      - mongo
+    environment:
+      - AIRFLOW_HOME=/src/airflow
+      - AIRFLOW__CORE__LOAD_EXAMPLES=False
+      - AIRFLOW__WEBSERVER__ENABLE_PROXY_FIX=True
+      - AIRFLOW__CORE__FERNET_KEY=AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
+      - AIRFLOW__CORE__EXECUTOR=SequentialExecutor
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORT=5432
+      - POSTGRES_USER=loguser
+      - POSTGRES_PASSWORD=Ren-ji24
+      - POSTGRES_DB=logistics
+      - MONGO_URI=mongodb://mongo:27017
+    command: bash -c "airflow db init && airflow users create --username admin --firstname Admin --lastname User --role Admin --email admin@example.com --password admin && (airflow scheduler & airflow webserver)"
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./airflow:/src/airflow
+      - ./src/models:/src/models
+      - ./streaming:/src/streaming
+
+volumes:
+  pgdata:
+  mongodata:

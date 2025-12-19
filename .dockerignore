@@ -1,0 +1,6 @@
+.git
+.venv
+airflow/logs
+__pycache__
+*.pyc
+.DS_Store

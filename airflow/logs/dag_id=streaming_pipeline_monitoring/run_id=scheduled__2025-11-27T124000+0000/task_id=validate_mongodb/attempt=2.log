@@ -1,0 +1,20 @@
+[2025-11-27T12:56:37.314+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-11-27T12:56:37.397+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: streaming_pipeline_monitoring.validate_mongodb scheduled__2025-11-27T12:40:00+00:00 [queued]>
+[2025-11-27T12:56:37.440+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: streaming_pipeline_monitoring.validate_mongodb scheduled__2025-11-27T12:40:00+00:00 [queued]>
+[2025-11-27T12:56:37.440+0000] {taskinstance.py:2306} INFO - Starting attempt 2 of 3
+[2025-11-27T12:56:37.510+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): validate_mongodb> on 2025-11-27 12:40:00+00:00
+[2025-11-27T12:56:37.518+0000] {standard_task_runner.py:63} INFO - Started process 37 to run task
+[2025-11-27T12:56:37.523+0000] {standard_task_runner.py:90} INFO - Running: ['airflow', 'tasks', 'run', 'streaming_pipeline_monitoring', 'validate_mongodb', 'scheduled__2025-11-27T12:40:00+00:00', '--job-id', '1247', '--raw', '--subdir', 'DAGS_FOLDER/streaming_pipeline_dag.py', '--cfg-path', '/tmp/tmp574h3ax_']
+[2025-11-27T12:56:37.526+0000] {standard_task_runner.py:91} INFO - Job 1247: Subtask validate_mongodb
+[2025-11-27T12:56:37.703+0000] {task_command.py:426} INFO - Running <TaskInstance: streaming_pipeline_monitoring.validate_mongodb scheduled__2025-11-27T12:40:00+00:00 [running]> on host 824c24f37451
+[2025-11-27T12:56:38.073+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='streaming_pipeline_monitoring' AIRFLOW_CTX_TASK_ID='validate_mongodb' AIRFLOW_CTX_EXECUTION_DATE='2025-11-27T12:40:00+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-11-27T12:40:00+00:00'
+[2025-11-27T12:56:38.074+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-11-27T12:56:38.162+0000] {logging_mixin.py:188} INFO - ✓ MongoDB: 83 documents au total
+[2025-11-27T12:56:38.163+0000] {logging_mixin.py:188} INFO - ✓ MongoDB: 83 agrégations dans les 10 dernières minutes
+[2025-11-27T12:56:38.164+0000] {logging_mixin.py:188} INFO - ✓ Exemple: {'_id': ObjectId('69284a356bd76610a2bf9cdf'), 'batch_id': 1, 'window_start': '2025-11-27T12:55:00', 'window_end': '2025-11-27T12:56:00', 'Market': 'Canada', 'avg_late_prob': 0.4925271410496641, 'events': 1}
+[2025-11-27T12:56:38.265+0000] {python.py:237} INFO - Done. Returned value was: True
+[2025-11-27T12:56:38.266+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-11-27T12:56:38.335+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=streaming_pipeline_monitoring, task_id=validate_mongodb, run_id=scheduled__2025-11-27T12:40:00+00:00, execution_date=20251127T124000, start_date=20251127T125637, end_date=20251127T125638
+[2025-11-27T12:56:38.469+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2025-11-27T12:56:38.575+0000] {taskinstance.py:3498} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-11-27T12:56:38.578+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

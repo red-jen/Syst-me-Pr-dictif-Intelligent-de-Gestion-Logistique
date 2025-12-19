@@ -1,0 +1,22 @@
+[2025-11-24T10:30:23.271+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-11-24T10:30:23.349+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: streaming_pipeline_monitoring.check_spark_streaming scheduled__2025-11-24T10:20:00+00:00 [queued]>
+[2025-11-24T10:30:23.380+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: streaming_pipeline_monitoring.check_spark_streaming scheduled__2025-11-24T10:20:00+00:00 [queued]>
+[2025-11-24T10:30:23.381+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 3
+[2025-11-24T10:30:23.490+0000] {taskinstance.py:2330} INFO - Executing <Task(BashOperator): check_spark_streaming> on 2025-11-24 10:20:00+00:00
+[2025-11-24T10:30:23.497+0000] {standard_task_runner.py:63} INFO - Started process 582 to run task
+[2025-11-24T10:30:23.504+0000] {standard_task_runner.py:90} INFO - Running: ['airflow', 'tasks', 'run', 'streaming_pipeline_monitoring', 'check_spark_streaming', 'scheduled__2025-11-24T10:20:00+00:00', '--job-id', '154', '--raw', '--subdir', 'DAGS_FOLDER/streaming_pipeline_dag.py', '--cfg-path', '/tmp/tmp3t983cfn']
+[2025-11-24T10:30:23.507+0000] {standard_task_runner.py:91} INFO - Job 154: Subtask check_spark_streaming
+[2025-11-24T10:30:23.710+0000] {task_command.py:426} INFO - Running <TaskInstance: streaming_pipeline_monitoring.check_spark_streaming scheduled__2025-11-24T10:20:00+00:00 [running]> on host 44ce18cdf754
+[2025-11-24T10:30:24.023+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='streaming_pipeline_monitoring' AIRFLOW_CTX_TASK_ID='check_spark_streaming' AIRFLOW_CTX_EXECUTION_DATE='2025-11-24T10:20:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-11-24T10:20:00+00:00'
+[2025-11-24T10:30:24.025+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-11-24T10:30:24.042+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2025-11-24T10:30:24.043+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', '\n        echo "✓ Vérification indirecte de Spark (via données PostgreSQL dans la prochaine tâche)"\n        echo "  Si PostgreSQL reçoit des prédictions récentes, c\'est que Spark fonctionne"\n        exit 0\n        ']
+[2025-11-24T10:30:24.056+0000] {subprocess.py:86} INFO - Output:
+[2025-11-24T10:30:24.058+0000] {subprocess.py:93} INFO - ✓ Vérification indirecte de Spark (via données PostgreSQL dans la prochaine tâche)
+[2025-11-24T10:30:24.058+0000] {subprocess.py:93} INFO -   Si PostgreSQL reçoit des prédictions récentes, c'est que Spark fonctionne
+[2025-11-24T10:30:24.060+0000] {subprocess.py:97} INFO - Command exited with return code 0
+[2025-11-24T10:30:24.061+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-11-24T10:30:24.197+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=streaming_pipeline_monitoring, task_id=check_spark_streaming, run_id=scheduled__2025-11-24T10:20:00+00:00, execution_date=20251124T102000, start_date=20251124T103023, end_date=20251124T103024
+[2025-11-24T10:30:24.291+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2025-11-24T10:30:24.394+0000] {taskinstance.py:3498} INFO - 2 downstream tasks scheduled from follow-on schedule check
+[2025-11-24T10:30:24.439+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

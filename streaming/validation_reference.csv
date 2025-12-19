@@ -1,0 +1,101 @@
+order_id,actual_late,market,delivery_status
+77202,0,Pacific Asia,Advance shipping
+75939,1,Pacific Asia,Late delivery
+75938,0,Pacific Asia,Shipping on time
+75937,0,Pacific Asia,Advance shipping
+75936,0,Pacific Asia,Advance shipping
+75935,0,Pacific Asia,Shipping canceled
+75934,1,Pacific Asia,Late delivery
+75933,1,Pacific Asia,Late delivery
+75932,1,Pacific Asia,Late delivery
+75931,1,Pacific Asia,Late delivery
+75930,0,Pacific Asia,Shipping canceled
+75929,1,Pacific Asia,Late delivery
+75928,1,Pacific Asia,Late delivery
+75927,1,Pacific Asia,Late delivery
+75926,1,Pacific Asia,Late delivery
+75925,1,Pacific Asia,Late delivery
+75924,1,Pacific Asia,Late delivery
+75923,1,Pacific Asia,Late delivery
+75922,1,Pacific Asia,Late delivery
+75921,0,Pacific Asia,Shipping on time
+75920,0,Pacific Asia,Shipping on time
+75919,1,Pacific Asia,Late delivery
+75918,1,Pacific Asia,Late delivery
+75917,0,Pacific Asia,Shipping canceled
+75916,0,Pacific Asia,Shipping canceled
+75915,1,Pacific Asia,Late delivery
+75914,1,Pacific Asia,Late delivery
+75913,0,Pacific Asia,Shipping on time
+75912,0,Pacific Asia,Advance shipping
+75911,0,Pacific Asia,Advance shipping
+75910,1,Pacific Asia,Late delivery
+75909,1,Pacific Asia,Late delivery
+75908,0,Pacific Asia,Shipping on time
+75907,1,Pacific Asia,Late delivery
+75906,1,Pacific Asia,Late delivery
+75905,1,Pacific Asia,Late delivery
+75904,1,Pacific Asia,Late delivery
+75903,1,Pacific Asia,Late delivery
+75902,1,Pacific Asia,Late delivery
+75901,0,Pacific Asia,Shipping canceled
+75900,1,Pacific Asia,Late delivery
+75899,1,Pacific Asia,Late delivery
+75898,0,Pacific Asia,Shipping on time
+75897,0,Pacific Asia,Advance shipping
+75896,0,Pacific Asia,Advance shipping
+75895,1,Pacific Asia,Late delivery
+75894,1,Pacific Asia,Late delivery
+75893,0,Pacific Asia,Shipping on time
+28744,1,Pacific Asia,Late delivery
+45461,0,Pacific Asia,Shipping on time
+31115,1,Pacific Asia,Late delivery
+45766,0,Pacific Asia,Shipping on time
+47752,1,Pacific Asia,Late delivery
+50054,1,Pacific Asia,Late delivery
+20365,1,Pacific Asia,Late delivery
+36146,0,USCA,Shipping on time
+41234,1,USCA,Late delivery
+32090,1,USCA,Late delivery
+34773,1,USCA,Late delivery
+44046,0,Africa,Shipping on time
+46414,1,Africa,Late delivery
+46599,1,Africa,Late delivery
+48434,1,Africa,Late delivery
+12827,1,Europe,Late delivery
+63936,0,Europe,Shipping on time
+65030,1,Europe,Late delivery
+18108,1,Europe,Late delivery
+62571,0,Europe,Shipping on time
+17162,1,Europe,Late delivery
+65922,1,Europe,Late delivery
+63936,0,Europe,Shipping on time
+64813,1,Europe,Late delivery
+67892,1,Europe,Late delivery
+12525,1,Europe,Late delivery
+5895,1,LATAM,Late delivery
+56359,1,LATAM,Late delivery
+58613,1,LATAM,Late delivery
+7824,1,LATAM,Late delivery
+7814,1,LATAM,Late delivery
+7814,1,LATAM,Late delivery
+60807,1,LATAM,Late delivery
+53413,1,LATAM,Late delivery
+7888,1,LATAM,Late delivery
+6783,1,LATAM,Late delivery
+56973,1,LATAM,Late delivery
+7824,1,LATAM,Late delivery
+55155,1,LATAM,Late delivery
+5991,0,LATAM,Shipping on time
+2263,1,LATAM,Late delivery
+2263,1,LATAM,Late delivery
+53403,1,LATAM,Late delivery
+51298,1,LATAM,Late delivery
+4919,1,LATAM,Late delivery
+52640,1,LATAM,Late delivery
+6358,0,LATAM,Shipping on time
+57106,0,LATAM,Advance shipping
+6245,1,LATAM,Late delivery
+52166,0,LATAM,Advance shipping
+56172,0,LATAM,Advance shipping
+55829,1,LATAM,Late delivery

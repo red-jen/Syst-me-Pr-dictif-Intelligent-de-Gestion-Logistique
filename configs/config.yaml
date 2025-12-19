@@ -1,5 +1,0 @@
-data_path: DataCoSupplyChainDataset.csv
-spark:
-  master: local[*]
-  app_name: DataCoSupplyChain
-model_dir: model/

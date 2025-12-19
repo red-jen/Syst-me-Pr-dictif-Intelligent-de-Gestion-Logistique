@@ -1,0 +1,41 @@
+[2025-11-27T12:34:29.784+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-11-27T12:34:29.819+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: streaming_pipeline_monitoring.validate_mongodb scheduled__2025-11-27T12:20:00+00:00 [queued]>
+[2025-11-27T12:34:29.838+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: streaming_pipeline_monitoring.validate_mongodb scheduled__2025-11-27T12:20:00+00:00 [queued]>
+[2025-11-27T12:34:29.839+0000] {taskinstance.py:2306} INFO - Starting attempt 3 of 3
+[2025-11-27T12:34:29.900+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): validate_mongodb> on 2025-11-27 12:20:00+00:00
+[2025-11-27T12:34:29.905+0000] {standard_task_runner.py:63} INFO - Started process 3350 to run task
+[2025-11-27T12:34:29.910+0000] {standard_task_runner.py:90} INFO - Running: ['airflow', 'tasks', 'run', 'streaming_pipeline_monitoring', 'validate_mongodb', 'scheduled__2025-11-27T12:20:00+00:00', '--job-id', '1230', '--raw', '--subdir', 'DAGS_FOLDER/streaming_pipeline_dag.py', '--cfg-path', '/tmp/tmpta2gynyg']
+[2025-11-27T12:34:29.914+0000] {standard_task_runner.py:91} INFO - Job 1230: Subtask validate_mongodb
+[2025-11-27T12:34:30.098+0000] {task_command.py:426} INFO - Running <TaskInstance: streaming_pipeline_monitoring.validate_mongodb scheduled__2025-11-27T12:20:00+00:00 [running]> on host ac78ca89de1e
+[2025-11-27T12:34:30.435+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='streaming_pipeline_monitoring' AIRFLOW_CTX_TASK_ID='validate_mongodb' AIRFLOW_CTX_EXECUTION_DATE='2025-11-27T12:20:00+00:00' AIRFLOW_CTX_TRY_NUMBER='3' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-11-27T12:20:00+00:00'
+[2025-11-27T12:34:30.437+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-11-27T12:34:30.505+0000] {logging_mixin.py:188} INFO - ✓ MongoDB: 0 documents au total
+[2025-11-27T12:34:30.511+0000] {logging_mixin.py:188} INFO - ✓ MongoDB: 0 agrégations dans les 10 dernières minutes
+[2025-11-27T12:34:30.511+0000] {logging_mixin.py:188} INFO - ✓ Exemple: None
+[2025-11-27T12:34:30.661+0000] {logging_mixin.py:188} INFO - ✗ Erreur MongoDB: Aucune donnée dans MongoDB!
+[2025-11-27T12:34:30.662+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-11-27T12:34:30.663+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/airflow/models/baseoperator.py", line 400, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/src/airflow/dags/streaming_pipeline_dag.py", line 117, in validate_mongodb_data
+    raise Exception("Aucune donnée dans MongoDB!")
+Exception: Aucune donnée dans MongoDB!
+[2025-11-27T12:34:30.685+0000] {taskinstance.py:1206} INFO - Marking task as FAILED. dag_id=streaming_pipeline_monitoring, task_id=validate_mongodb, run_id=scheduled__2025-11-27T12:20:00+00:00, execution_date=20251127T122000, start_date=20251127T123429, end_date=20251127T123430
+[2025-11-27T12:34:30.739+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 1230 for task validate_mongodb (Aucune donnée dans MongoDB!; 3350)
+[2025-11-27T12:34:30.753+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2025-11-27T12:34:30.787+0000] {taskinstance.py:3498} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-11-27T12:34:30.790+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

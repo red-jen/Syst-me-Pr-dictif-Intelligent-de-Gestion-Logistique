@@ -1,0 +1,38 @@
+[2025-11-23T15:34:02.629+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-11-23T15:34:02.678+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: streaming_pipeline_monitoring.check_spark_streaming scheduled__2025-11-23T15:20:00+00:00 [queued]>
+[2025-11-23T15:34:02.695+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: streaming_pipeline_monitoring.check_spark_streaming scheduled__2025-11-23T15:20:00+00:00 [queued]>
+[2025-11-23T15:34:02.696+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 3
+[2025-11-23T15:34:02.747+0000] {taskinstance.py:2330} INFO - Executing <Task(BashOperator): check_spark_streaming> on 2025-11-23 15:20:00+00:00
+[2025-11-23T15:34:02.753+0000] {standard_task_runner.py:63} INFO - Started process 770 to run task
+[2025-11-23T15:34:02.757+0000] {standard_task_runner.py:90} INFO - Running: ['airflow', 'tasks', 'run', 'streaming_pipeline_monitoring', 'check_spark_streaming', 'scheduled__2025-11-23T15:20:00+00:00', '--job-id', '5', '--raw', '--subdir', 'DAGS_FOLDER/streaming_pipeline_dag.py', '--cfg-path', '/tmp/tmp663v3oj4']
+[2025-11-23T15:34:02.760+0000] {standard_task_runner.py:91} INFO - Job 5: Subtask check_spark_streaming
+[2025-11-23T15:34:02.870+0000] {task_command.py:426} INFO - Running <TaskInstance: streaming_pipeline_monitoring.check_spark_streaming scheduled__2025-11-23T15:20:00+00:00 [running]> on host 53e08c058b38
+[2025-11-23T15:34:03.089+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='streaming_pipeline_monitoring' AIRFLOW_CTX_TASK_ID='check_spark_streaming' AIRFLOW_CTX_EXECUTION_DATE='2025-11-23T15:20:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-11-23T15:20:00+00:00'
+[2025-11-23T15:34:03.091+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-11-23T15:34:03.108+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2025-11-23T15:34:03.111+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', '\n        echo "Vérification de Spark Streaming..."\n        # Vérifier que le conteneur spark-stream existe et tourne\n        if docker ps --filter "name=spark-stream" --filter "status=running" | grep -q spark-stream; then\n            echo "✓ Conteneur Spark Streaming actif"\n            # Vérifier les logs pour des erreurs récentes\n            error_count=$(docker logs spark-stream --since 5m 2>&1 | grep -c "ERROR" || true)\n            echo "  Nombre d\'erreurs dans les 5 dernières minutes: $error_count"\n            if [ "$error_count" -gt 50 ]; then\n                echo "⚠ Attention: Trop d\'erreurs détectées ($error_count)"\n            fi\n            exit 0\n        else\n            echo "✗ Conteneur Spark Streaming non actif"\n            exit 1\n        fi\n        ']
+[2025-11-23T15:34:03.122+0000] {subprocess.py:86} INFO - Output:
+[2025-11-23T15:34:03.123+0000] {subprocess.py:93} INFO - Vérification de Spark Streaming...
+[2025-11-23T15:34:03.126+0000] {subprocess.py:93} INFO - /usr/bin/bash: line 4: docker: command not found
+[2025-11-23T15:34:03.131+0000] {subprocess.py:93} INFO - ✗ Conteneur Spark Streaming non actif
+[2025-11-23T15:34:03.133+0000] {subprocess.py:97} INFO - Command exited with return code 1
+[2025-11-23T15:34:03.134+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-11-23T15:34:03.154+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/airflow/models/baseoperator.py", line 400, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/airflow/operators/bash.py", line 243, in execute
+    raise AirflowException(
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 1.
+[2025-11-23T15:34:03.163+0000] {taskinstance.py:1206} INFO - Marking task as UP_FOR_RETRY. dag_id=streaming_pipeline_monitoring, task_id=check_spark_streaming, run_id=scheduled__2025-11-23T15:20:00+00:00, execution_date=20251123T152000, start_date=20251123T153402, end_date=20251123T153403
+[2025-11-23T15:34:03.224+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 5 for task check_spark_streaming (Bash command failed. The command returned a non-zero exit code 1.; 770)
+[2025-11-23T15:34:03.253+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2025-11-23T15:34:03.292+0000] {taskinstance.py:3498} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-11-23T15:34:03.294+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

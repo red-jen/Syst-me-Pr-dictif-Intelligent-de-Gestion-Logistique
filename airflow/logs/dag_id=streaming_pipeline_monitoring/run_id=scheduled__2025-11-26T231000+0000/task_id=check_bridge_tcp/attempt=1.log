@@ -1,0 +1,22 @@
+[2025-11-26T23:20:10.786+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-11-26T23:20:10.829+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: streaming_pipeline_monitoring.check_bridge_tcp scheduled__2025-11-26T23:10:00+00:00 [queued]>
+[2025-11-26T23:20:10.857+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: streaming_pipeline_monitoring.check_bridge_tcp scheduled__2025-11-26T23:10:00+00:00 [queued]>
+[2025-11-26T23:20:10.857+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 3
+[2025-11-26T23:20:10.922+0000] {taskinstance.py:2330} INFO - Executing <Task(BashOperator): check_bridge_tcp> on 2025-11-26 23:10:00+00:00
+[2025-11-26T23:20:10.926+0000] {standard_task_runner.py:63} INFO - Started process 1036 to run task
+[2025-11-26T23:20:10.930+0000] {standard_task_runner.py:90} INFO - Running: ['airflow', 'tasks', 'run', 'streaming_pipeline_monitoring', 'check_bridge_tcp', 'scheduled__2025-11-26T23:10:00+00:00', '--job-id', '914', '--raw', '--subdir', 'DAGS_FOLDER/streaming_pipeline_dag.py', '--cfg-path', '/tmp/tmphy0jhh4d']
+[2025-11-26T23:20:10.932+0000] {standard_task_runner.py:91} INFO - Job 914: Subtask check_bridge_tcp
+[2025-11-26T23:20:11.068+0000] {task_command.py:426} INFO - Running <TaskInstance: streaming_pipeline_monitoring.check_bridge_tcp scheduled__2025-11-26T23:10:00+00:00 [running]> on host ac78ca89de1e
+[2025-11-26T23:20:11.297+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='streaming_pipeline_monitoring' AIRFLOW_CTX_TASK_ID='check_bridge_tcp' AIRFLOW_CTX_EXECUTION_DATE='2025-11-26T23:10:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-11-26T23:10:00+00:00'
+[2025-11-26T23:20:11.299+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-11-26T23:20:11.313+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2025-11-26T23:20:11.314+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', '\n        echo "Vérification du Bridge TCP..."\n        if nc -z -w 5 bridge 9999; then\n            echo "✓ Bridge TCP actif sur port 9999"\n            exit 0\n        else\n            echo "✗ Bridge TCP ne répond pas"\n            exit 1\n        fi\n        ']
+[2025-11-26T23:20:11.325+0000] {subprocess.py:86} INFO - Output:
+[2025-11-26T23:20:11.326+0000] {subprocess.py:93} INFO - Vérification du Bridge TCP...
+[2025-11-26T23:20:11.328+0000] {subprocess.py:93} INFO - ✓ Bridge TCP actif sur port 9999
+[2025-11-26T23:20:11.329+0000] {subprocess.py:97} INFO - Command exited with return code 0
+[2025-11-26T23:20:11.330+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-11-26T23:20:11.405+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=streaming_pipeline_monitoring, task_id=check_bridge_tcp, run_id=scheduled__2025-11-26T23:10:00+00:00, execution_date=20251126T231000, start_date=20251126T232010, end_date=20251126T232011
+[2025-11-26T23:20:11.476+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2025-11-26T23:20:11.535+0000] {taskinstance.py:3498} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2025-11-26T23:20:11.554+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

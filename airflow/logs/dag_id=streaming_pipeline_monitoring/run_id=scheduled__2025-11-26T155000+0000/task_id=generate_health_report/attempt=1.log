@@ -1,0 +1,34 @@
+[2025-11-26T16:00:45.803+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-11-26T16:00:45.851+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: streaming_pipeline_monitoring.generate_health_report scheduled__2025-11-26T15:50:00+00:00 [queued]>
+[2025-11-26T16:00:45.883+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: streaming_pipeline_monitoring.generate_health_report scheduled__2025-11-26T15:50:00+00:00 [queued]>
+[2025-11-26T16:00:45.884+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 3
+[2025-11-26T16:00:45.985+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): generate_health_report> on 2025-11-26 15:50:00+00:00
+[2025-11-26T16:00:45.993+0000] {standard_task_runner.py:63} INFO - Started process 578 to run task
+[2025-11-26T16:00:45.999+0000] {standard_task_runner.py:90} INFO - Running: ['airflow', 'tasks', 'run', 'streaming_pipeline_monitoring', 'generate_health_report', 'scheduled__2025-11-26T15:50:00+00:00', '--job-id', '846', '--raw', '--subdir', 'DAGS_FOLDER/streaming_pipeline_dag.py', '--cfg-path', '/tmp/tmpv2844zr5']
+[2025-11-26T16:00:46.002+0000] {standard_task_runner.py:91} INFO - Job 846: Subtask generate_health_report
+[2025-11-26T16:00:46.173+0000] {task_command.py:426} INFO - Running <TaskInstance: streaming_pipeline_monitoring.generate_health_report scheduled__2025-11-26T15:50:00+00:00 [running]> on host ac78ca89de1e
+[2025-11-26T16:00:46.472+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='streaming_pipeline_monitoring' AIRFLOW_CTX_TASK_ID='generate_health_report' AIRFLOW_CTX_EXECUTION_DATE='2025-11-26T15:50:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-11-26T15:50:00+00:00'
+[2025-11-26T16:00:46.475+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-11-26T16:00:46.630+0000] {logging_mixin.py:188} INFO - 
+============================================================
+[2025-11-26T16:00:46.630+0000] {logging_mixin.py:188} INFO - RAPPORT DE SANTÉ DU PIPELINE
+[2025-11-26T16:00:46.631+0000] {logging_mixin.py:188} INFO - ============================================================
+[2025-11-26T16:00:46.632+0000] {logging_mixin.py:188} INFO - {
+  "timestamp": "2025-11-26T16:00:46.629641",
+  "status": "DEGRADED",
+  "postgres": {
+    "recent_predictions": 0,
+    "latest_timestamp": "None"
+  },
+  "mongodb": {
+    "total_aggregates": 13552,
+    "recent_aggregates": 0
+  }
+}
+[2025-11-26T16:00:46.633+0000] {logging_mixin.py:188} INFO - ============================================================
+[2025-11-26T16:00:46.739+0000] {python.py:237} INFO - Done. Returned value was: DEGRADED
+[2025-11-26T16:00:46.741+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-11-26T16:00:46.883+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=streaming_pipeline_monitoring, task_id=generate_health_report, run_id=scheduled__2025-11-26T15:50:00+00:00, execution_date=20251126T155000, start_date=20251126T160045, end_date=20251126T160046
+[2025-11-26T16:00:47.031+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2025-11-26T16:00:47.083+0000] {taskinstance.py:3498} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-11-26T16:00:47.087+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

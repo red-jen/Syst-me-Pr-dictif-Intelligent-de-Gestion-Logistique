@@ -1,0 +1,42 @@
+[2025-11-27T12:25:27.289+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-11-27T12:25:27.313+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: streaming_pipeline_monitoring.validate_postgres scheduled__2025-11-27T12:10:00+00:00 [queued]>
+[2025-11-27T12:25:27.325+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: streaming_pipeline_monitoring.validate_postgres scheduled__2025-11-27T12:10:00+00:00 [queued]>
+[2025-11-27T12:25:27.325+0000] {taskinstance.py:2306} INFO - Starting attempt 2 of 3
+[2025-11-27T12:25:27.361+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): validate_postgres> on 2025-11-27 12:10:00+00:00
+[2025-11-27T12:25:27.365+0000] {standard_task_runner.py:63} INFO - Started process 3278 to run task
+[2025-11-27T12:25:27.368+0000] {standard_task_runner.py:90} INFO - Running: ['airflow', 'tasks', 'run', 'streaming_pipeline_monitoring', 'validate_postgres', 'scheduled__2025-11-27T12:10:00+00:00', '--job-id', '1218', '--raw', '--subdir', 'DAGS_FOLDER/streaming_pipeline_dag.py', '--cfg-path', '/tmp/tmpygn0oqj0']
+[2025-11-27T12:25:27.370+0000] {standard_task_runner.py:91} INFO - Job 1218: Subtask validate_postgres
+[2025-11-27T12:25:27.442+0000] {task_command.py:426} INFO - Running <TaskInstance: streaming_pipeline_monitoring.validate_postgres scheduled__2025-11-27T12:10:00+00:00 [running]> on host ac78ca89de1e
+[2025-11-27T12:25:27.577+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='streaming_pipeline_monitoring' AIRFLOW_CTX_TASK_ID='validate_postgres' AIRFLOW_CTX_EXECUTION_DATE='2025-11-27T12:10:00+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-11-27T12:10:00+00:00'
+[2025-11-27T12:25:27.578+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-11-27T12:25:27.658+0000] {logging_mixin.py:188} INFO - ✗ Erreur PostgreSQL: 'utf-8' codec can't decode byte 0xe9 in position 125: invalid continuation byte
+[2025-11-27T12:25:27.658+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-11-27T12:25:27.659+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/airflow/models/baseoperator.py", line 400, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/src/airflow/dags/streaming_pipeline_dag.py", line 46, in validate_postgres_data
+    conn = psycopg2.connect(
+           ^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeDecodeError: 'utf-8' codec can't decode byte 0xe9 in position 125: invalid continuation byte
+[2025-11-27T12:25:27.676+0000] {taskinstance.py:1206} INFO - Marking task as UP_FOR_RETRY. dag_id=streaming_pipeline_monitoring, task_id=validate_postgres, run_id=scheduled__2025-11-27T12:10:00+00:00, execution_date=20251127T121000, start_date=20251127T122527, end_date=20251127T122527
+[2025-11-27T12:25:27.726+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 1218 for task validate_postgres ('utf-8' codec can't decode byte 0xe9 in position 125: invalid continuation byte; 3278)
+[2025-11-27T12:25:27.754+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2025-11-27T12:25:27.792+0000] {taskinstance.py:3498} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-11-27T12:25:27.794+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

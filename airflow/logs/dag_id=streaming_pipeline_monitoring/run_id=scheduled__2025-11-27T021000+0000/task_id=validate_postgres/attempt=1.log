@@ -1,0 +1,20 @@
+[2025-11-27T02:20:31.161+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-11-27T02:20:31.229+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: streaming_pipeline_monitoring.validate_postgres scheduled__2025-11-27T02:10:00+00:00 [queued]>
+[2025-11-27T02:20:31.290+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: streaming_pipeline_monitoring.validate_postgres scheduled__2025-11-27T02:10:00+00:00 [queued]>
+[2025-11-27T02:20:31.291+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 3
+[2025-11-27T02:20:31.411+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): validate_postgres> on 2025-11-27 02:10:00+00:00
+[2025-11-27T02:20:31.420+0000] {standard_task_runner.py:63} INFO - Started process 1853 to run task
+[2025-11-27T02:20:31.425+0000] {standard_task_runner.py:90} INFO - Running: ['airflow', 'tasks', 'run', 'streaming_pipeline_monitoring', 'validate_postgres', 'scheduled__2025-11-27T02:10:00+00:00', '--job-id', '1024', '--raw', '--subdir', 'DAGS_FOLDER/streaming_pipeline_dag.py', '--cfg-path', '/tmp/tmpwqa0myz2']
+[2025-11-27T02:20:31.428+0000] {standard_task_runner.py:91} INFO - Job 1024: Subtask validate_postgres
+[2025-11-27T02:20:31.589+0000] {task_command.py:426} INFO - Running <TaskInstance: streaming_pipeline_monitoring.validate_postgres scheduled__2025-11-27T02:10:00+00:00 [running]> on host ac78ca89de1e
+[2025-11-27T02:20:31.912+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='streaming_pipeline_monitoring' AIRFLOW_CTX_TASK_ID='validate_postgres' AIRFLOW_CTX_EXECUTION_DATE='2025-11-27T02:10:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-11-27T02:10:00+00:00'
+[2025-11-27T02:20:31.914+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-11-27T02:20:31.971+0000] {logging_mixin.py:188} INFO - ✓ PostgreSQL: 0 prédictions dans les 5 dernières minutes
+[2025-11-27T02:20:31.973+0000] {logging_mixin.py:188} INFO - ✓ Dernière prédiction: None
+[2025-11-27T02:20:31.974+0000] {logging_mixin.py:188} INFO - ⚠ Attention: Aucune prédiction récente détectée
+[2025-11-27T02:20:32.170+0000] {python.py:237} INFO - Done. Returned value was: True
+[2025-11-27T02:20:32.172+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-11-27T02:20:32.265+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=streaming_pipeline_monitoring, task_id=validate_postgres, run_id=scheduled__2025-11-27T02:10:00+00:00, execution_date=20251127T021000, start_date=20251127T022031, end_date=20251127T022032
+[2025-11-27T02:20:32.385+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2025-11-27T02:20:32.453+0000] {taskinstance.py:3498} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-11-27T02:20:32.459+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
